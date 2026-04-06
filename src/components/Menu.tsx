@@ -41,14 +41,14 @@ function fadeUp(delay = 0) {
 
 export function Menu() {
   return (
-    <section id="menu" className="bg-white py-28 md:py-36 px-6">
+    <section id="menu" className="bg-white py-16 md:py-36 px-4 md:px-6">
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
-        <motion.div {...fadeUp(0)} className="mb-16 md:mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <motion.div {...fadeUp(0)} className="mb-10 md:mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6">
           <div>
-            <p className="text-[11px] tracking-[0.3em] uppercase text-stone-400 mb-4 font-medium">What We Brew</p>
-            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-stone-900 leading-tight">
+            <p className="text-[11px] tracking-[0.3em] uppercase text-stone-400 mb-3 md:mb-4 font-medium">What We Brew</p>
+            <h2 className="font-playfair text-3xl md:text-5xl font-bold text-stone-900 leading-tight">
               The Menu
             </h2>
           </div>
@@ -60,8 +60,8 @@ export function Menu() {
           </a>
         </motion.div>
 
-        {/* Cards grid */}
-        <div className="grid md:grid-cols-3 gap-8 md:gap-6">
+        {/* Cards — single column mobile, 3 cols md+ */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6">
           {menuItems.map((item, i) => (
             <motion.div
               key={item.name}
@@ -69,7 +69,7 @@ export function Menu() {
               className="group flex flex-col"
             >
               {/* Image */}
-              <div className="relative aspect-[4/3] overflow-hidden bg-stone-100 mb-7">
+              <div className="relative aspect-[4/3] overflow-hidden bg-stone-100 mb-5 md:mb-7">
                 <Image
                   src={item.image}
                   alt={item.alt}
