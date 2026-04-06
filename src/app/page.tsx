@@ -16,8 +16,8 @@ export default function Home() {
         <ContainerScrollSection />
         <BrandsStrip />
         <About />
-        <Menu />
         <Testimonials />
+        <Menu />
       </main>
       <Footer />
     </>
