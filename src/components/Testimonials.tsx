@@ -15,22 +15,21 @@ const reviews = [
 
 function ReviewCard({ body, name, flag }: (typeof reviews)[number]) {
   return (
-    <div className="w-72 shrink-0 rounded-2xl bg-white shadow-sm border border-stone-100 px-6 py-5 mx-2">
-      {/* Stars */}
-      <div className="flex gap-0.5 mb-3">
+    <figure className="w-56 shrink-0 rounded-2xl bg-white border border-stone-100 shadow-sm px-5 py-4">
+      <div className="flex gap-0.5 mb-2.5">
         {Array.from({ length: 5 }).map((_, i) => (
-          <svg key={i} className="w-3.5 h-3.5 fill-amber-400" viewBox="0 0 20 20">
+          <svg key={i} className="w-3 h-3 fill-amber-400" viewBox="0 0 20 20">
             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
           </svg>
         ))}
       </div>
-      <p className="text-stone-700 text-sm leading-relaxed mb-4">
+      <blockquote className="text-xs text-stone-600 leading-relaxed mb-3">
         &ldquo;{body}&rdquo;
-      </p>
-      <p className="text-xs font-semibold text-stone-500 tracking-wide">
+      </blockquote>
+      <figcaption className="text-[11px] font-semibold text-stone-400 tracking-wide">
         {flag} {name}
-      </p>
-    </div>
+      </figcaption>
+    </figure>
   );
 }
 
@@ -47,19 +46,40 @@ export function Testimonials() {
         </h2>
       </div>
 
-      {/* Horizontal marquee row 1 — left to right */}
-      <Marquee pauseOnHover repeat={2} className="[--duration:30s] [--gap:0px] mb-4">
-        {reviews.map((r) => (
-          <ReviewCard key={r.name} {...r} />
-        ))}
-      </Marquee>
+      {/* 3D perspective container with 4 vertical marquee columns */}
+      <div className="relative flex h-[32rem] w-full flex-row items-center justify-center gap-3 overflow-hidden [perspective:500px]">
+        <div
+          className="flex flex-row items-start gap-3"
+          style={{
+            transform:
+              'translateX(-60px) translateZ(-80px) rotateX(15deg) rotateY(-8deg) rotateZ(15deg)',
+          }}
+        >
+          {/* Column 1 — down */}
+          <Marquee vertical pauseOnHover repeat={3} className="[--duration:28s]">
+            {reviews.map((r) => <ReviewCard key={r.name + '1'} {...r} />)}
+          </Marquee>
 
-      {/* Horizontal marquee row 2 — right to left */}
-      <Marquee pauseOnHover reverse repeat={2} className="[--duration:34s] [--gap:0px]">
-        {reviews.map((r) => (
-          <ReviewCard key={r.name} {...r} />
-        ))}
-      </Marquee>
+          {/* Column 2 — up */}
+          <Marquee vertical reverse pauseOnHover repeat={3} className="[--duration:32s]">
+            {reviews.map((r) => <ReviewCard key={r.name + '2'} {...r} />)}
+          </Marquee>
+
+          {/* Column 3 — down */}
+          <Marquee vertical pauseOnHover repeat={3} className="[--duration:26s]">
+            {reviews.map((r) => <ReviewCard key={r.name + '3'} {...r} />)}
+          </Marquee>
+
+          {/* Column 4 — up, hidden on small screens */}
+          <Marquee vertical reverse pauseOnHover repeat={3} className="[--duration:30s] hidden md:flex">
+            {reviews.map((r) => <ReviewCard key={r.name + '4'} {...r} />)}
+          </Marquee>
+        </div>
+
+        {/* Fade masks */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#faf7f2] to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#faf7f2] to-transparent" />
+      </div>
     </section>
   );
 }

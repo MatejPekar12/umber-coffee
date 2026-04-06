@@ -1,17 +1,5 @@
-import React, { ComponentPropsWithoutRef, useRef } from 'react';
+import React, { ComponentPropsWithoutRef } from 'react';
 import { cn } from '@/lib/utils';
-
-interface MarqueeProps extends ComponentPropsWithoutRef<'div'> {
-  className?: string;
-  reverse?: boolean;
-  pauseOnHover?: boolean;
-  children: React.ReactNode;
-  vertical?: boolean;
-  repeat?: number;
-  ariaLabel?: string;
-  ariaLive?: 'off' | 'polite' | 'assertive';
-  ariaRole?: string;
-}
 
 export function Marquee({
   className,
@@ -20,53 +8,38 @@ export function Marquee({
   children,
   vertical = false,
   repeat = 4,
-  ariaLabel,
-  ariaLive = 'off',
-  ariaRole = 'marquee',
   ...props
-}: MarqueeProps) {
-  const marqueeRef = useRef<HTMLDivElement>(null);
-
+}: {
+  className?: string;
+  reverse?: boolean;
+  pauseOnHover?: boolean;
+  children: React.ReactNode;
+  vertical?: boolean;
+  repeat?: number;
+} & ComponentPropsWithoutRef<'div'>) {
   return (
     <div
       {...props}
-      ref={marqueeRef}
-      data-slot="marquee"
       className={cn(
         'group flex overflow-hidden p-2 [--duration:40s] [--gap:1rem] [gap:var(--gap)]',
-        {
-          'flex-row': !vertical,
-          'flex-col': vertical,
-        },
+        { 'flex-row': !vertical, 'flex-col': vertical },
         className,
       )}
-      aria-label={ariaLabel}
-      aria-live={ariaLive}
-      role={ariaRole}
-      tabIndex={0}
     >
-      {React.useMemo(
-        () => (
-          <>
-            {Array.from({ length: repeat }, (_, i) => (
-              <div
-                key={i}
-                className={cn(
-                  !vertical ? 'flex-row [gap:var(--gap)]' : 'flex-col [gap:var(--gap)]',
-                  'flex shrink-0 justify-around',
-                  !vertical && 'animate-marquee flex-row',
-                  vertical && 'animate-marquee-vertical flex-col',
-                  pauseOnHover && 'group-hover:[animation-play-state:paused]',
-                  reverse && '[animation-direction:reverse]',
-                )}
-              >
-                {children}
-              </div>
-            ))}
-          </>
-        ),
-        [repeat, children, vertical, pauseOnHover, reverse],
-      )}
+      {Array.from({ length: repeat }, (_, i) => (
+        <div
+          key={i}
+          className={cn(
+            'flex shrink-0 justify-around',
+            !vertical && 'animate-marquee flex-row [gap:var(--gap)]',
+            vertical && 'animate-marquee-vertical flex-col [gap:var(--gap)]',
+            pauseOnHover && 'group-hover:[animation-play-state:paused]',
+            reverse && '[animation-direction:reverse]',
+          )}
+        >
+          {children}
+        </div>
+      ))}
     </div>
   );
 }
