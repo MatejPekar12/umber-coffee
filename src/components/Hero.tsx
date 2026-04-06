@@ -22,7 +22,7 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center px-4 pt-20 pb-12 md:px-6 md:pt-24 md:pb-16">
-        <div className="backdrop-blur-sm bg-white/40 rounded-2xl px-4 py-4 md:px-10 md:py-8 flex flex-col items-center w-full">
+        <div className="backdrop-blur-sm bg-white/40 rounded-2xl px-4 py-4 md:px-10 md:py-8 max-w-xs md:max-w-2xl mx-auto flex flex-col items-center">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -36,7 +36,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1, ease: 'easeOut' }}
-            className="font-playfair text-3xl leading-[1.1] sm:text-5xl md:text-7xl lg:text-[5.5rem] font-bold md:leading-[1.08] tracking-tight text-stone-900 mb-4 md:mb-7"
+            className="text-2xl md:text-6xl font-serif font-bold leading-[1.1] tracking-tight text-stone-900 mb-4 md:mb-7"
           >
             Coffee Worth<br />
             <span className="italic font-normal">Waking Up For</span>
@@ -46,7 +46,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.75, duration: 0.8, ease: 'easeOut' }}
-            className="text-sm md:text-lg text-stone-600 mb-8 md:mb-11 max-w-xs md:max-w-sm leading-relaxed"
+            className="text-sm md:text-lg text-stone-600 mb-6 md:mb-11 leading-relaxed"
           >
             Single-origin beans, expertly roasted and brewed to order.
           </motion.p>
