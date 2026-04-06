@@ -24,7 +24,7 @@ export function Hero() {
         style={{ WebkitPlaysinline: true } as any}
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="https://cdn.coverr.co/videos/coverr-pouring-coffee-beans-6984/1080p.mp4" type="video/mp4" />
+        <source src="/coffee-beans.mp4" type="video/mp4" />
       </video>
 
       {/* Subtle white overlay */}
